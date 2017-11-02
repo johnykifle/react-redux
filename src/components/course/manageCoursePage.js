@@ -2,30 +2,25 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
-import CourseList from './courseList';
 
-class CoursesPage extends React.Component {
+class ManageCoursePage extends React.Component {
     constructor(props, context){
         super(props, context);
-        this.state = {
-            course: {title: ''}
-        };
     }
     render(){
-        const {courses} = this.props;
-        return(
-           <CourseList courses={courses}/>
+        return (
+            <h1>Manage course</h1>
         );
     }
 }
 
-CoursesPage.propTypes = {
-    courses: PropTypes.array.isRequired
+ManageCoursePage.propTypes = {
 
 };
+
 function mapStateToProps(state, ownProps){
     return {
-        courses: state.courses
+        state: state
     };
 }
 
@@ -35,4 +30,4 @@ function mapDispatchToProps(dispatch){
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePage);
