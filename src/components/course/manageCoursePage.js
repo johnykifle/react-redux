@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
 import CourseForm from './courseForm';
+import {authorsFormattedForDropDown} from '../../selectors/selectors';
 import toastr from 'toastr';
 
-class ManageCoursePage extends React.Component {
+export class ManageCoursePage extends React.Component {
     constructor(props, context){
         super(props, context);
         this.state = {
@@ -30,8 +31,23 @@ class ManageCoursePage extends React.Component {
         return this.setState({course: course});
     }
 
+    courseFormIsValid(){
+        let formIsValid = true;
+        let errors = {};
+
+        if(!this.state.course.title.length < 5){
+            errors.title = 'Title must be at least 5 characters.';
+            formIsValid = false;
+        }
+
+        this.setState({errors: errors});
+        return formIsValid;
+    }
     saveCourse(event){
         event.preventDefault();
+        if(!this.courseFormIsValid()){
+            return;
+        }
         this.setState({saving: true});
         this.props.actions.saveCourse(this.state.course)
             .then(()=> this.redirect())
@@ -53,7 +69,7 @@ class ManageCoursePage extends React.Component {
                     course = {this.state.course}
                     errors= {this.state.errors}
                     onSave = {this.saveCourse}
-                    loading= {this.state.saving}
+                    saving= {this.state.saving}
                 />
         );
     }
@@ -82,15 +98,10 @@ function mapStateToProps(state, ownProps){
     if(courseId && state.courses.length > 0){
         course= getCourseById(state.courses, courseId);
     }
-    const authorFormattedForDropDown = state.authors.map(author => {
-        return {
-            value: author.id,
-            text: author.firstName + ' ' + author.lastName
-        };
-    });
+
     return {
         course: course,
-        authors: authorFormattedForDropDown
+        authors: authorsFormattedForDropDown(state.authors)
     };
 }
 
