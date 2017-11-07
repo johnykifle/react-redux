@@ -22,7 +22,7 @@ describe('Course Actions', () => {
             // assert (Redux test Recorder)
             expect(action).toEqual(expectedAction);
         });
-    })
+    });
 });
 
 const middleware = [thunk];

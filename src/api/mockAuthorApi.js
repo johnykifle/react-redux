@@ -35,6 +35,14 @@ class AuthorApi {
     });
   }
 
+  static updateAuthor(author){
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(Object.assign([], ...authors.filter(au=> au.id != author.id), Object.assign({}, author)));
+      }, delay);
+    });
+  }
+
   static saveAuthor(author) {
 	author = Object.assign({}, author); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {

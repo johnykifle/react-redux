@@ -9,6 +9,10 @@ const Header = ({loading}) => {
                 Home
             </IndexLink>
             {" | "}
+            <Link to ="/authors" activeClassName="active">
+            Authors
+            </Link>
+            {" | "}
             <Link to ="/courses" activeClassName="active">
             Courses
             </Link>
