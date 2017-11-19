@@ -2,23 +2,35 @@ import expect from 'expect';
 import {mount, shallow} from 'enzyme';
 import React from 'react';
 import DeleteButton from './DeleteButton';
-
-function setup(){
-  let props = {
-    text: 'delete',
-    onClick: () => {}
-  };
-return shallow(<DeleteButton {...props}/>);
-}
+import Button from './Button';
 
 describe('DeleteButton', () => {
-  it('Delete button renderes ok', () => {
-    const wrapper = setup();
-    expect(wrapper.find('Button').length).toBe(1);
+
+  let props;
+  let shallowDeleteButton;
+  const deleteButton = () => {
+    if(!shallowDeleteButton){
+      shallowDeleteButton = mount(<DeleteButton {...props}/>);
+    }
+    return shallowDeleteButton;
+  }
+
+  beforeEach(() => {
+    props = {
+      text: 'delete',
+      onClick: undefined
+    };
+    shallowDeleteButton = undefined
   });
 
-  it('delete button is labeled "delete"', () => {
-    const wrapper = setup();
+  it('Always renders "Button"', () => {
+    const wrapper = deleteButton();
+    expect(wrapper.find(Button).length).toBe(1);
+  });
+
+  it('Button is labeled "delete"', () => {
+    const wrapper = deleteButton();
     expect(wrapper.find('Button').props().text).toBe('delete');
   });
+
 });

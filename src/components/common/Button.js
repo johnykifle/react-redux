@@ -3,13 +3,13 @@ import classNames from 'classnames';
 
 class Button extends React.Component{
   render(){
-    let classes = classNames({
-      'btn btn-danger' : this.props.type === 'delete',
-      'btn btn-primary' : this.props.type === 'primary'
-    });
+    // let classes = classNames({
+    //   'btn btn-danger' : this.props.type === 'delete',
+    //   'btn btn-primary' : this.props.type === 'primary'
+    // });
     return (
       <button
-        className= {classes}
+        className= {this.props.classes}
         type="button"
         onClick= {this.props.onClick}>
         {this.props.text}
@@ -21,7 +21,8 @@ class Button extends React.Component{
 Button.propTypes = {
   onClick: PropTypes.func,
   text: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  classes: PropTypes.func
 };
 
 Button.defaultProps = {

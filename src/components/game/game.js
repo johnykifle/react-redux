@@ -2,9 +2,14 @@ import React from 'react';
 
 import _ from "lodash";
 
-import Row from "./Row";
-import Cell from "./Cell";
-import Footer from "./Footer";
+import Row from "./row";
+import Cell from "./cell";
+import Footer from "./footer";
+
+import BaseButton from '../common/BaseButton';
+import makeDeleteButton from '../common/makeDeleteButton';
+import classNames from 'classnames';
+
 
 class Game extends React.Component {
   constructor(props) {
@@ -77,6 +82,12 @@ class Game extends React.Component {
   }
 
   render() {
+    let classes = classNames({
+      'btn btn-danger' : true
+    });
+
+    const newButton = makeDeleteButton(BaseButton);
+
     let showActiveCells =
       ["memorize", "lost"].indexOf(this.state.gameState) >= 0;
 
@@ -95,6 +106,7 @@ class Game extends React.Component {
         <Footer {...this.state}
                 playAgain={this.props.createNewGame}
                 activeCellsCount={this.props.activeCellsCount} />
+        <newButton myClasses = {classes} />
       </div>
     );
   }

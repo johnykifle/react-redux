@@ -1,9 +1,14 @@
+import DeleteButton from '../common/DeleteButton';
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {browserHistory} from 'react-router';
 import * as courseActions from '../../actions/courseActions';
 import CourseList from './courseList';
+import Button from '../common/Button';
+import DeleteBtnHOC from '../common/DeleteBtnHOC';
+
+const DBtn =  DeleteBtnHOC(Button);
 
 class CoursesPage extends React.Component {
     constructor(props, context){
@@ -13,21 +18,23 @@ class CoursesPage extends React.Component {
         };
         this.redirectToAddCoursePage = this.redirectToAddCoursePage.bind(this);
     }
+
     redirectToAddCoursePage() {
         browserHistory.push('/course');
     }
     render(){
         const {courses} = this.props;
+
         return(
             <div>
                 <h1>Courses</h1>
-                <input 
+                <input
                     type="submit"
                     value="Add course"
                     className="btn btn-primary"
                     onClick={this.redirectToAddCoursePage} />
                <CourseList courses={courses}/>
-
+               <DBtn />
             </div>
         );
     }
