@@ -7,6 +7,10 @@ import * as courseActions from '../../actions/courseActions';
 import CourseList from './courseList';
 import Button from '../common/Button';
 import DeleteBtnHOC from '../common/DeleteBtnHOC';
+import ExpandableTable from '../common/ExpandableTable';
+import Canvas from '../common/Canvas';
+import Mondrian from '../common/Mondrian';
+//import courseSelects from '../../selectors/courseAuthorsSelectors';
 
 const DBtn =  DeleteBtnHOC(Button);
 
@@ -23,7 +27,7 @@ class CoursesPage extends React.Component {
         browserHistory.push('/course');
     }
     render(){
-        const {courses} = this.props;
+        const {courses, agg} = this.props;
 
         return(
             <div>
@@ -35,6 +39,8 @@ class CoursesPage extends React.Component {
                     onClick={this.redirectToAddCoursePage} />
                <CourseList courses={courses}/>
                <DBtn />
+               <ExpandableTable/>
+                <Mondrian/>
             </div>
         );
     }
@@ -47,6 +53,7 @@ CoursesPage.propTypes = {
 function mapStateToProps(state, ownProps){
     return {
         courses: state.courses
+        // agg: courseSelects(state)
     };
 }
 
