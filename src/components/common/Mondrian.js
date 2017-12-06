@@ -20,6 +20,10 @@ class Rectangle {
   get height() {
       return this.max.y - this.min.y
   }
+
+  draw(ctx) {
+
+  }
 }
 
 class Mondrian extends React.Component {

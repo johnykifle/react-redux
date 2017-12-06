@@ -6,11 +6,11 @@ const coursesSelector = state => state.courses;
 
 
 const getAggregates = (authors, courses) => {
-  var authorIds = authors.map(a => a.id);
+  const authorIds = authors.map(a => a.id);
   const authorsWithCourses = _.filter(
     courses,
     course => _.contains(authorIds, course.authorId)
-  )
+  );
 };
 
 export default createSelector(
